@@ -15,17 +15,17 @@ CFBFファイルは，構造的なファイルであるという点でJSONやXML
 
 https://github.com/miyako/4d-plugin-CFBF
 
-Offie文書（[xls](https://msdn.microsoft.com/en-us/library/office/cc313106(v=office.12).aspx), [doc](https://msdn.microsoft.com/en-us/library/office/cc313153(v=office.12).aspx), [ppt](https://msdn.microsoft.com/en-us/library/office/cc313154(v=office.12).aspx)）の構造は公開されています。
+Offie文書（[XLS](https://msdn.microsoft.com/en-us/library/office/cc313106(v=office.12).aspx), [DOC](https://msdn.microsoft.com/en-us/library/office/cc313153(v=office.12).aspx), [PPT](https://msdn.microsoft.com/en-us/library/office/cc313154(v=office.12).aspx)）の構造は公開されています。
 
 CFBFの構造がわかれば，DOC・XLS・PPTなどの複合バイナリファイルから個別のデータを取り出すことができます。
 
-個別のデータもそれぞれがバイナリ形式の構造体です。構造体の定義は，上述した資料（MS-XLS, MS-DOC, MS-PPT）に加え，MS-DTYP, MS-OAUT, MS-OLEPS, MS-OSHAREDなど，いくつかの仕様書に記述されています。それらを参照して，4DのBLOBコマンドを使用することにより，これらを数値・日付・テキストなどのデータ型に変換することができます。
+個別のデータもそれぞれがバイナリ形式の構造体です。構造体の定義は，上述した資料に加え，[DTYP](https://msdn.microsoft.com/en-us/library/cc230273.aspx), [OAUT](https://msdn.microsoft.com/en-us/library/cc237549.aspx), [OLEPS](https://msdn.microsoft.com/en-us/library/dd942421.aspx), [OSHARED](https://msdn.microsoft.com/en-us/library/office/cc313156(v=office.12).aspx)など，いくつかの仕様書に記述されています。それらを参照して，4DのBLOBコマンドを使用することにより，これらを数値・日付・テキストなどのデータ型に変換することができます。
 
 **ポイント**
 
 * XLS, DOC, PPTはどれもCFBF，つまり複合バイナリファイルである
 * CFBFは[4d-plugin-CFBF](https://github.com/miyako/4d-plugin-CFBF)で個別のバイナリデータに分解できる
 * 個別のバイナリデータは，BLOBコマンドにより，数値・日付・テキストなどのデータ型に変換することができる
-* 個別のバイナリデータに何が記録されているのかは，MS-XLS, MS-DOC, MS-PPTに説明されている
-* データがどのような形式で記録されているのかは，MS-DTYP, MS-OAUT, MS-OLEPS, MS-OSHAREDに説明されている
+* 個別のバイナリデータに何が記録されているのかは，[XLS](https://msdn.microsoft.com/en-us/library/office/cc313106(v=office.12).aspx), [DOC](https://msdn.microsoft.com/en-us/library/office/cc313153(v=office.12).aspx), [PPT](https://msdn.microsoft.com/en-us/library/office/cc313154(v=office.12).aspx)に説明されている
+* データがどのような形式で記録されているのかは，[DTYP](https://msdn.microsoft.com/en-us/library/cc230273.aspx), [OAUT](https://msdn.microsoft.com/en-us/library/cc237549.aspx), [OLEPS](https://msdn.microsoft.com/en-us/library/dd942421.aspx), [OSHARED](https://msdn.microsoft.com/en-us/library/office/cc313156(v=office.12).aspx)に説明されている
 
