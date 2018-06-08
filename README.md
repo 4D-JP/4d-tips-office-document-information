@@ -60,3 +60,31 @@ CFBFプラグインでこれを解析すると，下記のようなJSONが返さ
 	]
 }
 ```
+
+ストレージ名に制御文字（``\u0005``）が含まれていますが，仕様書を参照すると，これが正式名称であることが確認できます。（[MS-XLS].pdf, 2.1.7.4）
+
+印刷日は，``\u0005SummaryInformation``のプロパティのひとつです。
+
+```
+ARRAY OBJECT($storages;0)
+OB GET ARRAY($XLS;"storages";$storages)
+C_TEXT($name)
+
+For ($i;1;Size of array($storages))
+	
+	$storage:=$storages{$i}
+	$name:=OB Get($storage;"name";Is text)
+	
+	Case of 
+		: (Match regex("\\u0005DocumentSummaryInformation";$name))
+
+		: (Match regex("\\u0005SummaryInformation";$name))
+
+		: ($name="CompObj")
+
+		: ($name="Workbook")
+		
+	End case 
+	
+End for 
+```
