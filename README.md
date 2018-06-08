@@ -24,8 +24,8 @@ CFBFの構造がわかれば，DOC・XLS・PPTなどの複合バイナリファ�
 **ポイント**
 
 * XLS, DOC, PPTはどれもCFBF，つまり複合バイナリファイルである
-* CFBFは(4d-plugin-CFBF)[https://github.com/miyako/4d-plugin-CFBF]で個別のバイナリデータに分解できる
+* CFBFは[4d-plugin-CFBF](https://github.com/miyako/4d-plugin-CFBF)で個別のバイナリデータに分解できる
 * 個別のバイナリデータは，BLOBコマンドにより，数値・日付・テキストなどのデータ型に変換することができる
-* 個別のバイナリデータに何が記録されているのかは，仕様書（MS-XLS, MS-DOC, MS-PPT）に説明されている
-* データがどのような形式で記録されているのかは，仕様書（MS-DTYP, MS-OAUT, MS-OLEPS, MS-OSHARED）に説明されている
+* 個別のバイナリデータに何が記録されているのかは，MS-XLS, MS-DOC, MS-PPTに説明されている
+* データがどのような形式で記録されているのかは，MS-DTYP, MS-OAUT, MS-OLEPS, MS-OSHAREDに説明されている
 
