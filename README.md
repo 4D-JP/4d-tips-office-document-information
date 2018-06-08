@@ -89,4 +89,4 @@ For ($i;1;Size of array($storages))
 End for 
 ```
 
-``data``は，BLOB配列の要素番号です。つまり，``$2->{OB Get($storage;"data";Is longint)})``で``\u0005SummaryInformation``に値を取り出すことができます。
+``data``は，BLOB配列の要素番号です。つまり，``$2->{OB Get($storage;"data";Is longint)})``で``\u0005SummaryInformation``の値を取り出すことができます。
