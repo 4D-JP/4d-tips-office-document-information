@@ -90,3 +90,30 @@ End for
 ```
 
 ``data``は，BLOB配列の要素番号です。つまり，``$2->{OB Get($storage;"data";Is longint)})``で``\u0005SummaryInformation``の値を取り出すことができます。
+
+取り出したデータの形式はOSHAREDに準拠しています。``0x0000``~``0x0007``番地には，いくつかの基本情報が書かれています。
+
+```
+$byteOrder:=($1{0} << 8)+$1{1}  //0xFFFE is a reserved value
+$version:=($1{2} << 8)+$1{3}  //version number of the property set
+$OSMajorVersion:=$1{4}  //major version of the operating system that created the file
+$OSMinorVersion:=$1{5}  //minor version of the operating system that created the file
+$OSType:=($1{6} << 8)+$1{7}
+```
+
+``0x0010``番地は，アプリケーションのクラスIDです。
+
+```
+C_BLOB($applicationClsid)
+COPY BLOB($1;$applicationClsid;8;0;0x0010)
+```
+
+``0x0018``番地は，セクションの数です。それぞれのセクションは，プロパティの集合です。
+
+```
+$pos:=0x0018
+$cSections:=BLOB to longint($1;PC byte ordering;$pos)
+```
+
+``0x001C``番地からは，各セクションのクラスID，開始位置，サイズ，プロパティ数が書かれています。セクションの開始位置にジャンプすると，各プロパティの識別子と開始位置（オフセット）が書かれています。プロパティの識別子がわかれば，その形式が特定できます。
+
