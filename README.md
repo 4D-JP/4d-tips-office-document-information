@@ -19,4 +19,13 @@ Offie文書（[xls](https://msdn.microsoft.com/en-us/library/office/cc313106(v=o
 
 CFBFの構造がわかれば，DOC・XLS・PPTなどの複合バイナリファイルから個別のデータを取り出すことができます。
 
-個別のデータもそれぞれがバイナリ形式の構造体です。BLOBコマンドを使用することにより，これらを数値・日付・テキストなどのデータ型に変換することができます。
+個別のデータもそれぞれがバイナリ形式の構造体です。構造体の定義は，上述した資料（MS-XLS, MS-DOC, MS-PPT）に加え，MS-DTYP, MS-OAUT, MS-OLEPS, MS-OSHAREDなど，いくつかの仕様書に記述されています。それらを参照して，4DのBLOBコマンドを使用することにより，これらを数値・日付・テキストなどのデータ型に変換することができます。
+
+**ポイント**
+
+* XLS, DOC, PPTはどれもCFBF，つまり複合バイナリファイルである
+* CFBFは(4d-plugin-CFBF)[https://github.com/miyako/4d-plugin-CFBF]で個別のバイナリデータに分解できる
+* 個別のバイナリデータは，BLOBコマンドにより，数値・日付・テキストなどのデータ型に変換することができる
+* 個別のバイナリデータに何が記録されているのかは，仕様書（MS-XLS, MS-DOC, MS-PPT）に説明されている
+* データがどのような形式で記録されているのかは，仕様書（MS-DTYP, MS-OAUT, MS-OLEPS, MS-OSHARED）に説明されている
+
