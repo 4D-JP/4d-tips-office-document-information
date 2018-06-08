@@ -1,5 +1,4 @@
-# 4d-tips-office-document-information
-Offie文書（xls, doc, ppt）の『印刷日』を取得するには
+### Offie文書（xls, doc, ppt）の『印刷日』を取得するには
 
 Microsoft Officeの古典的なファイル形式（``xls``, ``doc``, ``ppt``）は，いずれもCFBF（[Compound File Binary Format](https://en.wikipedia.org/wiki/Compound_File_Binary_Format)）と呼ばれる形式のバイナリファイルです。
 
@@ -29,7 +28,7 @@ CFBFの構造がわかれば，DOC・XLS・PPTなどの複合バイナリファ�
 * 個別のバイナリデータに何が記録されているのかは，[XLS](https://msdn.microsoft.com/en-us/library/office/cc313106(v=office.12).aspx), [DOC](https://msdn.microsoft.com/en-us/library/office/cc313153(v=office.12).aspx), [PPT](https://msdn.microsoft.com/en-us/library/office/cc313154(v=office.12).aspx)に説明されている
 * データがどのような形式で記録されているのかは，[DTYP](https://msdn.microsoft.com/en-us/library/cc230273.aspx), [OAUT](https://msdn.microsoft.com/en-us/library/cc237549.aspx), [OLEPS](https://msdn.microsoft.com/en-us/library/dd942421.aspx), [OSHARED](https://msdn.microsoft.com/en-us/library/office/cc313156(v=office.12).aspx)に説明されている
 
-### 印刷日を取得する
+#### 印刷日を取得する
 
 スプレッドシートをExcel 97-2004形式（``xls``）で保存します。
 
