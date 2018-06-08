@@ -17,11 +17,7 @@ CFBFファイルは，構造的なファイルであるという点でJSONやXML
 
 https://github.com/miyako/4d-plugin-CFBF
 
-Offie文書（xls, doc, ppt）の構造は公開されています。
-
-https://msdn.microsoft.com/en-us/library/office/cc313153(v=office.12).aspx
-https://msdn.microsoft.com/en-us/library/office/cc313106(v=office.12).aspx
-https://msdn.microsoft.com/en-us/library/office/cc313154(v=office.12).aspx
+Offie文書（[xls](https://msdn.microsoft.com/en-us/library/office/cc313106(v=office.12).aspx), [doc](https://msdn.microsoft.com/en-us/library/office/cc313153(v=office.12).aspx), [ppt](https://msdn.microsoft.com/en-us/library/office/cc313154(v=office.12).aspx)）の構造は公開されています。
 
 CFBFの構造がわかれば，DOC・XLS・PPTなどの複合バイナリファイルから個別のデータを取り出すことができます。
 
