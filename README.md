@@ -254,3 +254,7 @@ SET TEXT TO PASTEBOARD(JSON Stringify($XLS))
 	}
 }
 ```
+
+### ダウンロード
+
+https://github.com/4D-JP/4d-tips-office-document-information/releases/tag/1.0
