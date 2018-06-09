@@ -156,3 +156,27 @@ If (BLOB size($1)=8)
 End if 
 ```
 
+* サンプル
+
+```
+$path:=Get 4D folder(Current resources folder)+"sample.xls"
+
+C_BLOB($CFBF)
+DOCUMENT TO BLOB($path;$CFBF)
+
+C_TEXT($json)
+ARRAY BLOB($bytes;0)
+
+CFBF PARSE DATA ($CFBF;$json;$bytes)
+
+$XLS:=PARSE_OLE (JSON Parse($json);->$bytes)
+
+SET TEXT TO PASTEBOARD(JSON Stringify($XLS))
+```
+
+* 結果
+
+```
+{"SummaryInformation":{"byteOrder":65279,"version":0,"OSMajorVersion":3,"OSMinorVersion":10,"applicationClsid":"{00000000-0000-0000-0000-000000000000}","OSType":256,"cSections":1,"sections":[{"sectionOffset":48,"formatId":"{F29F85E0-4FF9-1068-91AB-08002B27B3D9}","cbSection":35012,"cProps":13,"properties":[{"CODEPAGE":65001,"TITLE":"タイトル","SUBJECT":"件名","AUTHOR":"Microsoft Office ユーザー","KEYWORDS":"キーワード","COMMENTS":"こめこめ","LASTAUTHOR":"Microsoft Office ユーザー","APPNAME":"Microsoft Macintosh Excel","LASTPRINTED":"2018-06-08T15:00:00.000Z","CREATE_DTM":"2018-06-07T15:00:00.000Z","LASTSAVE_DTM":"2018-06-08T15:00:00.000Z","DOC_SECURITY":0}]}]},"DocumentSummaryInformation":{"byteOrder":65279,"version":0,"OSMajorVersion":3,"OSMinorVersion":10,"applicationClsid":"{00000000-0000-0000-0000-000000000000}","OSType":256,"cSections":2,"sections":[{"sectionOffset":68,"formatId":"{D5CDD502-2E9C-101B-9793-08002B2CF9AE}","cbSection":272,"cProps":11,"properties":[{"CODEPAGE":65001,"CATEGORY":"分類","MANAGER":"管理者","COMPANY":"フォーディー","VERSION":"15.0","SCALE":false,"LINKSDIRTY":false,"SHAREDDOC":false}]},{"sectionOffset":340,"formatId":"{D5CDD505-2E9C-101B-9793-08002B2CF9AE}","cbSection":80,"cProps":3,"properties":[{"0":null,"CODEPAGE":65001}]}]}}
+```
+
