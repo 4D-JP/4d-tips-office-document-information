@@ -121,7 +121,7 @@ $cSections:=BLOB to longint($1;PC byte ordering;$pos)
 
 4Dに64ビット整数型の変数はありませんので，[テキストで整数を計算する](https://github.com/miyako/4d-tips-text-integer-maths)か，近似値で構わないのであれば，下記のように実数でこれを計算することができます。
 
-**注記**: Microsoftの``FILETIME``構造体は，1601年1月1日を起点としていますが，これを4Dの``Add to date``で処理すると，かなりの誤差が発生します。UNIX時間に変換（``11644473600``秒を追加）してから``Add to date``で処理すれば，正確な日付と時刻が得られます。
+**注記**: Microsoftの``FILETIME``構造体は，1601年1月1日を起点としていますが，これを4Dの``Add to date``で処理すると，かなりの誤差が発生します。UNIX時間に変換（``11644473600``秒を減算）してから``Add to date``で処理すれば，正確な日付と時刻が得られます。
 
 ```
 C_BLOB($1;$FILETIME)
