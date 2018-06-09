@@ -119,7 +119,9 @@ $cSections:=BLOB to longint($1;PC byte ordering;$pos)
 
 たとえば，印刷日プロパティの識別子は``PIDSI_LASTPRINTED``つまり``0x000B``です。この形式は，``TypedPropertyValue``なので，まずプロパティの開始位置にジャンプします。すると値は``0x0040``つまり``FILETIME``形式であることがわかります。これは，``8``バイト（``64``ビット）の整数値であり，1601年1月1日から経過した時間を100ナノ秒単位で表現したものです。
 
-4Dに64ビット整数型の変数はありませんが，近似値で構わないのであれば，下記のように実数でこれを計算することができます。
+4Dに64ビット整数型の変数はありませんので，[テキストで整数を計算する](https://github.com/miyako/4d-tips-text-integer-maths)か，近似値で構わないのであれば，下記のように実数でこれを計算することができます。
+
+**注記**: MicrosoftのF``ILETIME``構造体は，1601年1月1日を起点としていますが，これを4Dの``Add to date``で処理すると，かなりの誤差が発生します。UNIX時間に変換（``11644473600``秒を追加）してから``Add to date``で処理すれば，正確な日付と時刻が得られます。
 
 ```
 C_BLOB($1;$FILETIME)
@@ -150,13 +152,14 @@ If (BLOB size($1)=8)
 	
 	$dwLowDateTime:=($dwLowDateTimeH*0x00010000)+$dwLowDateTimeL
 	$dwHighDateTime:=($dwHighDateTimeH*0x00010000)+$dwHighDateTimeL
-	
+
 	$seconds:=((4294967296*$dwLowDateTime)+$dwHighDateTime)/10000000
-	$days:=$seconds/86400
-	
-	$date:=Add to date(!1601-01-01!;0;0;$days)
-	$time:=$seconds%86400
-	
+	$unixtime:=$seconds-11644473600
+
+	$days:=$unixtime/86400
+	$date:=Add to date(!1970-01-01!;0;0;$days)
+	$time:=$unixtime%86400
+
 	$0:=String(Year of($date);"0000")+"-"+\
 	String(Month of($date);"00")+"-"+\
 	String(Day of($date);"00")+"T"+\
