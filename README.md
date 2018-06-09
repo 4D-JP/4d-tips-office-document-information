@@ -117,3 +117,42 @@ $cSections:=BLOB to longint($1;PC byte ordering;$pos)
 
 ``0x001C``番地からは，各セクションのクラスID，開始位置，サイズ，プロパティ数が書かれています。セクションの開始位置にジャンプすると，各プロパティの識別子と開始位置（オフセット）が書かれています。プロパティの識別子がわかれば，その形式が特定できます。形式が``TypedPropertyValue``の場合，プロパティの開始位置にジャンプすることにより，実際の形式が特定できます。
 
+たとえば，印刷日プロパティの識別子は``PIDSI_LASTPRINTED``つまり``0x000B``です。この形式は，``TypedPropertyValue``なので，まずプロパティの開始位置にジャンプします。すると値は``0x0040``つまり``FILETIME``形式であることがわかります。これは，``8``バイト（``64``ビット）の整数値であり，1601年1月1日から経過した時間を100ナノ秒単位で表現したものです。
+
+4Dに64ビット整数型の変数はありませんが，近似値で構わないのであれば，下記のように実数でこれを計算することができます。
+
+```
+SET BLOB SIZE($FILETIME;8)
+
+If (BLOB size($1)=8)
+	
+	  //byte swap
+	
+	$FILETIME{0}:=$1{7}
+	$FILETIME{1}:=$1{6}
+	$FILETIME{2}:=$1{5}
+	$FILETIME{3}:=$1{4}
+	$FILETIME{4}:=$1{3}
+	$FILETIME{5}:=$1{2}
+	$FILETIME{6}:=$1{1}
+	$FILETIME{7}:=$1{0}
+	
+	$propOffset:=0
+	
+	$dwLowDateTimeH:=0xFFFF & BLOB to integer($FILETIME;Macintosh byte ordering;$propOffset)
+	$dwLowDateTimeL:=0xFFFF & BLOB to integer($FILETIME;Macintosh byte ordering;$propOffset)
+	
+	$dwHighDateTimeH:=0xFFFF & BLOB to integer($FILETIME;Macintosh byte ordering;$propOffset)
+	$dwHighDateTimeL:=0xFFFF & BLOB to integer($FILETIME;Macintosh byte ordering;$propOffset)
+	
+	$dwLowDateTime:=($dwLowDateTimeH*0x00010000)+$dwLowDateTimeL
+	$dwHighDateTime:=($dwHighDateTimeH*0x00010000)+$dwHighDateTimeL
+	
+	$seconds:=((4294967296*$dwLowDateTime)+$dwHighDateTime)/10000000
+	$days:=$seconds/86400
+	
+	$0:=Add to date(!1601-01-01!;0;0;$days)
+	
+End if 
+```
+
