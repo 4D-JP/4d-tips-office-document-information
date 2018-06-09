@@ -122,6 +122,9 @@ $cSections:=BLOB to longint($1;PC byte ordering;$pos)
 4Dに64ビット整数型の変数はありませんが，近似値で構わないのであれば，下記のように実数でこれを計算することができます。
 
 ```
+C_BLOB($1;$FILETIME)
+C_TEXT($0)
+
 SET BLOB SIZE($FILETIME;8)
 
 If (BLOB size($1)=8)
@@ -151,7 +154,13 @@ If (BLOB size($1)=8)
 	$seconds:=((4294967296*$dwLowDateTime)+$dwHighDateTime)/10000000
 	$days:=$seconds/86400
 	
-	$0:=Add to date(!1601-01-01!;0;0;$days)
+	$date:=Add to date(!1601-01-01!;0;0;$days)
+	$time:=$seconds%86400
+	
+	$0:=String(Year of($date);"0000")+"-"+\
+	String(Month of($date);"00")+"-"+\
+	String(Day of($date);"00")+"T"+\
+	String(Time($time);HH MM SS)+".000Z"
 	
 End if 
 ```
@@ -202,9 +211,9 @@ SET TEXT TO PASTEBOARD(JSON Stringify($XLS))
 						"COMMENTS": "こめこめ",
 						"LASTAUTHOR": "Microsoft Office ユーザー",
 						"APPNAME": "Microsoft Macintosh Excel",
-						"LASTPRINTED": "2018-06-08T15:00:00.000Z",
-						"CREATE_DTM": "2018-06-07T15:00:00.000Z",
-						"LASTSAVE_DTM": "2018-06-08T15:00:00.000Z",
+						"LASTPRINTED": "2018-06-09T21:27:32.000Z",
+						"CREATE_DTM": "2018-06-08T09:11:34.000Z",
+						"LASTSAVE_DTM": "2018-06-09T21:27:40.000Z",
 						"DOC_SECURITY": 0
 					}
 				]
